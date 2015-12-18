@@ -1,5 +1,5 @@
 {
-  "name": "rcmuser/ui",
+  "name": "rcm/user/ui",
   "description": "{DESCRIPTION}",
   "type": "library",
   "license": "BSD-3-Clause",
@@ -19,7 +19,8 @@
   ],
   "require": {
     "php": ">=5.5",
-    "zendframework/zendframework": "2.*"
+    "zendframework/zendframework": "2.*",
+    "rcm/user": "1.*"
   },
   "autoload": {
     "psr-4": {
