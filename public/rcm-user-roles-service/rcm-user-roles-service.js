@@ -1,9 +1,7 @@
-'use strict';
-/** rcmUser from core js **/
-rcmUser.rcmUserRolesService = {};
-
-angular.module('rcmUserRolesService', ['rcmuserCore'])
-    .factory(
+/**
+ * rcmUserRolesService.rcmUserRolesService
+ */
+angular.module('rcmUserRolesService').factory(
     'rcmUserRolesService',
     [
         '$log', '$http', 'rcmUserConfig',
@@ -75,15 +73,15 @@ angular.module('rcmUserRolesService', ['rcmuserCore'])
                         }
                     )
                         .success(
-                        function (data, status, headers, config) {
-                            self.setRoles(data.data);
-                        }
-                    )
+                            function (data, status, headers, config) {
+                                self.setRoles(data.data);
+                            }
+                        )
                         .error(
-                        function (data, status, headers, config) {
-                            $log.error('An error occured while talking to the server');
-                        }
-                    );
+                            function (data, status, headers, config) {
+                                $log.error('An error occured while talking to the server');
+                            }
+                        );
                 };
 
                 /**
@@ -390,21 +388,6 @@ angular.module('rcmUserRolesService', ['rcmuserCore'])
             var rcmUserRolesService = new RcmUserRolesService();
 
             return rcmUserRolesService;
-        }
-    ]
-);
-
-/**
- * Exposes Angular service to global scope for use by other libraries
- * - This is to support jQuery and native JavaScript modules and code
- * Angular injector to get Module services
- */
-angular.injector(['ng', 'rcmUserRolesService']).invoke(
-    [
-        'rcmUserRolesService',
-        function (rcmUserRolesService) {
-
-            rcmUser.rcmUserRolesService.service = rcmUserRolesService;
         }
     ]
 );

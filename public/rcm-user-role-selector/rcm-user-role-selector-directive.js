@@ -1,6 +1,5 @@
-angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
 /**
- * rcmUserRoleSelector - rcm-user-role-selector
+ * rcmUserRoleSelector.rcm-user-role-selector
  * Example with all properties set
  *     <div
  *     rcm-user-role-selector="pagePermissions"
@@ -14,10 +13,14 @@ angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
  *     >
  *     </div>
  */
-    .directive(
+angular.module('rcmUserRoleSelector').directive(
     'rcmUserRoleSelector',
     [
-        '$log', '$http', '$parse', 'getNamespaceRepeatString', 'rcmUserRolesService',
+        '$log',
+        '$http',
+        '$parse',
+        'getNamespaceRepeatString',
+        'rcmUserRolesService',
         function ($log, $http, $parse, getNamespaceRepeatString, rcmUserRolesService) {
 
             var thisLink = function (scope, element, attrs) {
@@ -118,7 +121,9 @@ angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
                 self.init = function () {
 
                     if (typeof scope.valueNamespace !== 'string') {
-                        $log.error("Attribute rcm-user-role-selector requires a value. It will be the unique name used to store cached selected roles.");
+                        $log.error(
+                            "Attribute rcm-user-role-selector requires a value. It will be the unique name used to store cached selected roles."
+                        );
                     }
 
                     if (typeof attrs.rcmUserRoleSelectorIdProperty === 'string' && attrs.rcmUserRoleSelectorIdProperty != '') {
@@ -167,7 +172,9 @@ angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
                         function (roles) {
                             scope.loading = false;
                             scope.roles = roles;
-                            scope.selectedRoles = rcmUserRolesService.getSelectedRoles(scope.valueNamespace);
+                            scope.selectedRoles = rcmUserRolesService.getSelectedRoles(
+                                scope.valueNamespace
+                            );
                             self.safeApply();
                         }
                     );
@@ -175,7 +182,9 @@ angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
                     rcmUser.eventManager.on(
                         'rcmUserRolesService.onSetSelectedRoles',
                         function (result) {
-                            scope.selectedRoles = rcmUserRolesService.getSelectedRoles(scope.valueNamespace);
+                            scope.selectedRoles = rcmUserRolesService.getSelectedRoles(
+                                scope.valueNamespace
+                            );
                             self.safeApply();
                         }
                     );
@@ -183,7 +192,9 @@ angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
                     rcmUser.eventManager.on(
                         'rcmUserRolesService.onSetSelectedRole',
                         function (result) {
-                            scope.selectedRoles = rcmUserRolesService.getSelectedRoles(scope.valueNamespace);
+                            scope.selectedRoles = rcmUserRolesService.getSelectedRoles(
+                                scope.valueNamespace
+                            );
                             self.safeApply();
                         }
                     );
@@ -238,7 +249,13 @@ angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
                 };
 
                 scope.mySave = function () {
-                    $log.log('Test Save', 'Selected Roles:', scope.selectedRoles, 'Selected Roles Strings: ', selectedRolesStrings);
+                    $log.log(
+                        'Test Save',
+                        'Selected Roles:',
+                        scope.selectedRoles,
+                        'Selected Roles Strings: ',
+                        selectedRolesStrings
+                    );
                 };
 
                 scope.getNestingString = function (model) {
@@ -289,33 +306,4 @@ angular.module('rcmUserRoleSelector', ['rcmUserRolesService'])
             };
         }
     ]
-)
-    .filter(
-    'rcmUserRoleFilter',
-    function () {
-
-        var compareStr = function (stra, strb) {
-            stra = ("" + stra).toLowerCase();
-            strb = ("" + strb).toLowerCase();
-
-            return stra.indexOf(strb) !== -1;
-        };
-
-        return function (input, query) {
-            if (!query) {
-                return input
-            }
-            var result = {};
-
-            angular.forEach(
-                input, function (role, key) {
-                    if (compareStr(role.roleId, query)) {
-                        result[key] = role;
-                    }
-                }
-            );
-
-            return result;
-        };
-    }
 );
