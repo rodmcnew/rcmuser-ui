@@ -1,6 +1,6 @@
 {
   "name": "rcm/user-ui",
-  "description": "{DESCRIPTION}",
+  "description": "RCM User HTML views/pages",
   "type": "library",
   "license": "BSD-3-Clause",
   "keywords": [
