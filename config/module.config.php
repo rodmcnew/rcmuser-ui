@@ -91,6 +91,29 @@ return [
         ],
     ],
     /**
+     * Set for rcm-admin module
+     */
+    'navigation' => [
+        'RcmAdminMenu' => [
+//            'User' => [
+//                'label' => 'Users',
+//                'uri' => '#',
+//                'pages' => [
+//                    'RolesAndAccess' => [
+//                        //'class'  => 'RcmAdminMenu RcmBlankIframeDialog',
+//                        'label' => 'Roles and Access',
+//                        'uri' => '/admin/rcmuser-acl',
+//                    ],
+//                    'UserManagement' => [
+//                        //'class'  => 'RcmAdminMenu RcmBlankIframeDialog',
+//                        'label' => 'User Management',
+//                        'uri' => '/admin/rcmuser-users',
+//                    ],
+//                ],
+//            ],
+        ],
+    ],
+    /**
      * Configuration
      */
     'RcmUser\\Ui' => [
