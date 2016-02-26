@@ -425,7 +425,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                         <!-- + RESOURCE -->
                         <div ng-hide="roleData.role.isSuperAdminRole"">
                             <div class="container-fluid admin-acl-resource-section"
-                                 ng-repeat="ruleData in roleData.rules">
+                                 ng-repeat="ruleData in roleData.rules" ng-show="resources[ruleData.resourceId]">
 
                                 <div class="container-fluid">
                                     <div class="row">
