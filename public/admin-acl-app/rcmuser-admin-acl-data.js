@@ -11,9 +11,6 @@ angular.module('rcmuserAdminAclApp').factory(
 
             self.url = rcmUserConfig.url;
 
-            self.superAdminRole = '<?php echo $superAdminRoleId; ?>';
-            self.guestRole = '<?php echo $guestRoleId; ?>';
-
             self.get = function(success, error) {
                 // @todo API call here
             };

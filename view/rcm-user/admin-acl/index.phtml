@@ -405,14 +405,14 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                             </div>
                             <div class="">
                                 <!-- @todo Implement when ready
-                                <button type="button" class="btn btn-primary btn-xs" disabled="true" ng-click="openEditRole('sm', roleData)" ng-hide="superAdminRole == roleData.role.roleId">
+                                <button type="button" class="btn btn-primary btn-xs" disabled="true" ng-click="openEditRole('sm', roleData)" ng-hide="roleData.role.isSuperAdminRole">
                                     <i class="glyphicon glyphicon-edit"></i> edit role
                                 </button>
                                 -->
                                 <button type="button" class="btn btn-warning btn-xs"
                                         ng-click="openRemoveRole('sm', roleData)"
                                         ng-disabled="rcmUserHttp.loading"
-                                        ng-hide="superAdminRole == roleData.role.roleId">
+                                        ng-hide="roleData.role.isSuperAdminRole">
                                     <i class="glyphicon glyphicon-minus"></i> remove role
                                 </button>
                             </div>
@@ -423,7 +423,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                         </section>
 
                         <!-- + RESOURCE -->
-                        <div ng-hide="superAdminRole == roleData.role.roleId">
+                        <div ng-hide="roleData.role.isSuperAdminRole"">
                             <div class="container-fluid admin-acl-resource-section"
                                  ng-repeat="ruleData in roleData.rules">
 
@@ -495,7 +495,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                                 </div>
                             </div>
                         </div>
-                        <div ng-show="superAdminRole == roleData.role.roleId">
+                        <div ng-show="roleData.role.isSuperAdminRole">
                             <div class="alert alert-info">
                                 <i class="glyphicon glyphicon-info-sign"></i>
                                 <span class="is-superadmin">This role is super admin. Role has full access and cannot be changed.</span>

@@ -22,9 +22,6 @@ angular.module('rcmuserAdminAclApp').controller(
 
             $scope.roleData = {};
 
-            $scope.superAdminRole = rcmuserAdminAclData.superAdminRole;
-            $scope.guestRole = rcmuserAdminAclData.guestRole;
-
             $scope.oneAtATime = true;
 
             $scope.resourceCount = 0;
