@@ -11,7 +11,15 @@ angular.module('rcmuserAdminUsersApp').controller(
         'RcmUserResult',
         'RcmResults',
         'rcmuserAdminUsersData',
-        function ($scope, $log, $modal, RcmUserHttp, RcmUserResult, RcmResults, rcmuserAdminUsersData) {
+        function (
+            $scope,
+            $log,
+            $modal,
+            RcmUserHttp,
+            RcmUserResult,
+            RcmResults,
+            rcmuserAdminUsersData
+        ) {
             var self = this;
 
             $scope.rcmUserHttp = new RcmUserHttp();

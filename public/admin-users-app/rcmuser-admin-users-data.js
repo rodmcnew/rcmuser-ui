@@ -11,7 +11,7 @@ angular.module('rcmuserAdminUsersApp').factory(
 
             self.url = rcmUserConfig.url;
 
-            self.rolePropertyId = '<?php echo $rolePropertyId; ?>';
+            self.rolePropertyId = 'RcmUserUserRoles';
 
             self.availableStates = [
                 'enabled',
