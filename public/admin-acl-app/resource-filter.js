@@ -19,7 +19,9 @@ angular.module('rcmuserAdminAclApp').filter(
             var regex = new RegExp(query, 'i');
             for (var key in input) {
                 var resource = input[key];
-                if (regex.test("" + resource.resource.resourceId) || regex.test("" + resource.resource.name)) {
+                if (regex.test("" + resource.resource.resourceId)
+                    || regex.test("" + resource.resource.name)
+                    || regex.test("" + resource.resource.description)) {
                     result.push(resource);
                 }
                 if (result.length >= maxResults) {
