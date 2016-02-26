@@ -70,7 +70,13 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                                                         {{resource.resource.name}}
                                                     </div>
                                                     <div>
-                                                        ({{resource.resource.resourceId}})
+                                                        ({{resource.resource.description}})
+                                                    </div>
+                                                    <div>
+                                                        Resource: {{resource.resource.resourceId}}
+                                                    </div>
+                                                    <div>
+                                                        NameSpace: {{resource.resourceNs}}
                                                     </div>
                                                 </a>
                                             </li>
