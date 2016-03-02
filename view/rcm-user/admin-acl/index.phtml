@@ -56,7 +56,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                                         placeholder="Enter resource id"
                                         required="true"
                                         type="text"
-                                        />
+                                    />
 
                                     <div class="list-dropdown"
                                          ng-show="status.isopen"
@@ -83,21 +83,28 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                                         </ul>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="privilege">Privilege: </label>
-                                    <select class="form-control"
-                                            name="privilege"
-                                            ng-model="ruleData.privilege"
-                                            required="true">
-                                        <option selected="selected"
-                                                value="">*ALL*
-                                        </option>
-                                        <option
-                                            ng-repeat="priv in resources[ruleData.resourceId].resource.privileges"
-                                            value="{{priv}}">{{priv}}
-                                        </option>
-                                    </select>
+                                    <pre>{{ruleData | json}}</pre>
+                                    <div class="form-inline">
+                                        <label for="privilege">Privileges:</label>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row resource-privilege">
+                                            <input type="checkbox"
+                                                   name="privilegeAll"
+                                                   ng-model="selected.allPrivileges"
+                                                   ng-change="allRulePrivileges(selected.allPrivileges)"/>
+                                            <label for="privilegeAll">*ALL*</label>
+                                        </div>
+                                        <div class="row resource-privilege"
+                                             ng-repeat="privilege in resources[ruleData.resourceId].resource.privileges">
+                                            <input type="checkbox"
+                                                   name="privilege{{privilege}}"
+                                                   ng-model="selected.privileges[privilege]"
+                                                   ng-change="toggleRulePrivilege(privilege, selected.privileges[privilege])"/>
+                                            <label for="privilege{{privilege}}">{{privilege}}</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
 
@@ -145,9 +152,15 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                                 </div>
                             </div>
                             <div>
-                                <div>For privilege:</div>
-                                <div class="resource-privilege">{{(ruleData.privilege ||
-                                    '*ALL*')}}
+                                <div>For privileges:</div>
+                                <div class="resource-privilege"
+                                     ng-hide="ruleData.privileges.length">
+                                    *ALL*
+                                </div>
+                                <div class="resource-privilege"
+                                     ng-show="ruleData.privileges.length"
+                                     ng-repeat="privilege in ruleData.privileges">
+                                    - {{privilege}}
                                 </div>
                             </div>
                             <div>
@@ -221,7 +234,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                                         ng-maxlength="255"
                                         required="true"
                                         value=""
-                                        >
+                                    >
                                     </textarea>
                                 </div>
                             </form>
@@ -365,7 +378,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                 </div>
             </form>
 
-           <div rcm-alerts rcm-results="rcmUserHttp.alerts"
+            <div rcm-alerts rcm-results="rcmUserHttp.alerts"
                  alert-title-error="'An error occured:'"
                  alert-title-success="'Success:'"></div>
 
@@ -423,9 +436,10 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                         </section>
 
                         <!-- + RESOURCE -->
-                        <div ng-hide="roleData.role.isSuperAdminRole"">
+                        <div ng-hide="roleData.role.isSuperAdminRole">
                             <div class="container-fluid admin-acl-resource-section"
-                                 ng-repeat="ruleData in roleData.rules" ng-show="resources[ruleData.resourceId]">
+                                 ng-repeat="ruleData in roleData.rules"
+                                 ng-show="resources[ruleData.resourceId]">
 
                                 <div class="container-fluid">
                                     <div class="row">
@@ -442,8 +456,16 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                                                 </span>
                                                 <span>({{resources[ruleData.resourceId].resource.resourceId}})</span>
                                             </div>
-                                            <div>For privilege
-                                                <span class="resource-privilege">{{(ruleData.privilege || '* (ALL)')}}</span>
+                                            <div>For privileges
+                                                <div class="resource-privilege"
+                                                     ng-hide="ruleData.privileges.length">
+                                                    * (ALL)
+                                                </div>
+                                                <div class="resource-privilege"
+                                                     ng-show="ruleData.privileges.length"
+                                                     ng-repeat="privilege in ruleData.privileges">
+                                                    - {{privilege}}
+                                                </div>
                                             </div>
                                         </div>
 

@@ -136,6 +136,7 @@
 .rcmuser .list-dropdown {
     overflow: visible;
     position: relative;
+    z-index: 10000;
 }
 
 .rcmuser .list-dropdown a,
@@ -211,6 +212,7 @@
     color: #000;
     font-size: 1em;
     font-weight: bold;
+
 }
 
 .rcmuser .admin-acl-resource-section {
