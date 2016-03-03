@@ -61,7 +61,7 @@ angular.module('rcmuserAdminAclApp').controller(
                         rule: 'allow',
                         roleId: roleData.role.roleId,
                         resourceId: '',
-                        privilege: ''
+                        privileges: []
                     };
 
                     $scope.cancel = function () {
@@ -101,6 +101,46 @@ angular.module('rcmuserAdminAclApp').controller(
                         );
                     };
 
+                    $scope.addRulePrivilege = function (privilege) {
+                        if ($scope.ruleData.privileges.indexOf(privilege) < 0) {
+                            $scope.ruleData.privileges.push(privilege);
+                        }
+                    };
+
+                    $scope.removeRulePrivilege = function (privilege) {
+                        var index = $scope.ruleData.privileges.indexOf(privilege);
+                        if (index > -1) {
+                            $scope.ruleData.privileges.splice(index, 1);
+                        }
+                    };
+
+                    $scope.selected = {
+                        privileges: {},
+                        allPrivileges: true
+                    };
+
+                    $scope.allRulePrivileges = function (hasAllPrivileges) {
+
+                        if(!hasAllPrivileges) {
+                            return;
+                        }
+                        for (var property in $scope.selected.privileges) {
+                            $scope.selected.privileges[property] = false;
+                        }
+
+                        $scope.ruleData.privileges = [];
+                    };
+
+                    $scope.toggleRulePrivilege = function (privilege, isChecked) {
+
+                        if (isChecked) {
+                            $scope.addRulePrivilege(privilege);
+                        } else {
+                            $scope.removeRulePrivilege(privilege);
+                        }
+
+                        $scope.selected.allPrivileges = ($scope.ruleData.privileges.length == 0);
+                    }
                 };
 
                 var modal = $modal.open(
