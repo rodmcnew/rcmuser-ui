@@ -2,12 +2,13 @@
 
 namespace RcmUser\Ui\View\Helper;
 
+use RcmUser\Ui\Service\RcmUserHtml;
+use RcmUser\Ui\Service\RcmUserHtmlService;
 use Zend\View\Helper\AbstractHelper;
 
 /**
+ * @deprecated Use RcmUserHtml->buildDefaultHtmlHead()
  * Class RcmUserBuildHtmlHead
- *
- * LongDescHere
  *
  * PHP version 5
  *
@@ -22,18 +23,23 @@ use Zend\View\Helper\AbstractHelper;
 class RcmUserBuildHtmlHead extends AbstractHelper
 {
     /**
-     * @var array|null
+     * @var RcmUserHtmlService
      */
-    public $htmlAssets = null;
+    public $rcmUserHtmlService;
 
+    /**
+     * @var null|\Zend\View\Renderer\RendererInterface
+     */
     public $view;
 
     /**
-     * @param array|null $htmlAssets
+     * RcmUserBuildHtmlHead constructor.
+     *
+     * @param RcmUserHtmlService $rcmUserHtmlService
      */
-    public function __construct($htmlAssets = null)
+    public function __construct(RcmUserHtmlService $rcmUserHtmlService)
     {
-        $this->htmlAssets = $htmlAssets;
+        $this->rcmUserHtmlService = $rcmUserHtmlService;
         $this->view = $this->getView();
     }
 
@@ -44,19 +50,7 @@ class RcmUserBuildHtmlHead extends AbstractHelper
      */
     public function buildHtmlHead()
     {
-        if (is_array($this->htmlAssets)) {
-            foreach ($this->htmlAssets as $type => $paths) {
-                foreach ($paths as $path) {
-                    $this->includeHead(
-                        $type,
-                        $path
-                    );
-                }
-
-            }
-
-            $this->htmlAssets = null;
-        }
+        $this->rcmUserHtmlService->buildDefaultHtmlHead($this->view);
     }
 
     /**
@@ -71,17 +65,11 @@ class RcmUserBuildHtmlHead extends AbstractHelper
         $type,
         $path
     ) {
-        switch ($type) {
-            case 'css':
-                $this->view->headLink()->appendStylesheet($path);
-                break;
-            case 'js':
-                $this->view->headScript()->appendFile($path);
-                break;
-        }
+        $this->rcmUserHtmlService->includeHead($this->view, $type, $path);
     }
 
     /**
+     * @deprecated Use RcmUserHtml->buildDefaultHtmlHead()
      * __invoke
      *
      * @param array $options options

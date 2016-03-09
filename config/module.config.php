@@ -143,7 +143,8 @@ return [
      */
     'service_manager' => [
         'factories' => [
-
+            'RcmUser\Ui\Service\RcmUserHtmlService'
+            => 'RcmUser\Ui\Factory\RcmUserHtmlServiceFactory'
         ]
     ],
     /**

@@ -6,6 +6,7 @@ use RcmUser\Service\RcmUserService;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
+ * @deprecated Use RcmUserService->getCurrentUser()
  * RcmUserGetCurrentUser
  *
  * RcmUserGetCurrentUser
@@ -40,6 +41,7 @@ class RcmUserGetCurrentUser extends AbstractPlugin
     }
 
     /**
+     * @deprecated Use RcmUserService->getCurrentUser()
      * __invoke
      *
      * @param mixed $default default

@@ -8,6 +8,7 @@ use RcmUser\User\Entity\User;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
+ * @deprecated Use RcmUserService->hasRoleBasedAccess()
  * RcmUserHasRoleBasedAccess
  *
  * RcmUserHasRoleBasedAccess
@@ -50,6 +51,7 @@ class RcmUserHasRoleBasedAccess extends AbstractPlugin
     }
 
     /**
+     * @deprecated Use RcmUserService->hasRoleBasedAccess()
      * __invoke
      *
      * @param $roleId
