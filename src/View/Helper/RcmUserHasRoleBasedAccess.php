@@ -7,6 +7,7 @@ use RcmUser\User\Entity\User;
 use Zend\View\Helper\AbstractHelper;
 
 /**
+ * @deprecated Use RcmUserService->hasRoleBasedAccess()
  * Class RcmUserHasRoleBasedAccess
  *
  * RcmUserHasRoleBasedAccess
@@ -48,6 +49,7 @@ class RcmUserHasRoleBasedAccess extends AbstractHelper
     }
 
     /**
+     * @deprecated Use RcmUserService->hasRoleBasedAccess()
      * __invoke
      *
      * @param $roleId

@@ -30,11 +30,11 @@ class RcmUserBuildHtmlHead implements FactoryInterface
     public function createService(ServiceLocatorInterface $mgr)
     {
         $serviceLocator = $mgr->getServiceLocator();
-        $config = $serviceLocator->get(
-            'config'
+        $rcmUserHtmlService = $serviceLocator->get(
+            'RcmUser\Ui\Service\RcmUserHtmlService'
         );
         $service = new \RcmUser\Ui\View\Helper\RcmUserBuildHtmlHead(
-            $config['RcmUser\\Ui']['htmlAssets']
+            $rcmUserHtmlService
         );
 
         return $service;

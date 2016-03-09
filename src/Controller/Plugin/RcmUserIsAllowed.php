@@ -7,6 +7,7 @@ use RcmUser\Authentication\Service\UserAuthenticationService;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
+ * @deprecated Use RcmUserService->isAllowed()
  * RcmUserIsAllowed
  *
  * RcmUserIsAllowed
@@ -49,6 +50,7 @@ class RcmUserIsAllowed extends AbstractPlugin
     }
 
     /**
+     * @deprecated Use RcmUserService->isAllowed()
      * __invoke
      *
      * @param string $resourceId resourceId

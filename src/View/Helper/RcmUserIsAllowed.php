@@ -7,6 +7,7 @@ use RcmUser\Authentication\Service\UserAuthenticationService;
 use Zend\View\Helper\AbstractHelper;
 
 /**
+ * @deprecated Use RcmUserService->isAllowed()
  * Class RcmUserIsAllowed
  *
  * RcmUserIsAllowed
@@ -49,6 +50,7 @@ class RcmUserIsAllowed extends AbstractHelper
     }
 
     /**
+     * @deprecated Use RcmUserService->isAllowed()
      * __invoke
      *
      * @param string $resourceId resourceId

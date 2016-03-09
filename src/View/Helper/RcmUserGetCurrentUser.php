@@ -6,6 +6,7 @@ use RcmUser\Service\RcmUserService;
 use Zend\View\Helper\AbstractHelper;
 
 /**
+ * @deprecated Use RcmUserService->getCurrentUser()
  * Class RcmUserGetCurrentUser
  *
  * RcmUserGetCurrentUser
@@ -40,6 +41,7 @@ class RcmUserGetCurrentUser extends AbstractHelper
     }
 
     /**
+     * @deprecated Use RcmUserService->getCurrentUser()
      * __invoke
      *
      * @param mixed $default default
