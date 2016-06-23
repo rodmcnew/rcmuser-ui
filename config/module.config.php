@@ -124,9 +124,10 @@ return [
          */
         'htmlAssets' => [
             'js' => [
-                '/modules/rcm-angular-js/angular/angular.js',
+                // Expect Angular from RCM core
+                // '/vendor/angular/angular.js',
                 '/vendor/bootstrap/dist/js/bootstrap.min.js',
-                '/modules/rcm-angular-js/angular-ui/bootstrap/ui-bootstrap-tpls-0.11.0.min.js',
+                '/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
             ],
 
             'css' => [

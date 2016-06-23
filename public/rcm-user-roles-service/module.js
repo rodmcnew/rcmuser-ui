@@ -6,3 +6,7 @@
 rcmUser.rcmUserRolesService = {};
 
 angular.module('rcmUserRolesService', ['rcmuserCore']);
+
+if (typeof rcm != 'undefined') {
+    rcm.addAngularModule('rcmUserRolesService');
+}

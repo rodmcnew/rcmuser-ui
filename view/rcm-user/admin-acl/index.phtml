@@ -6,7 +6,7 @@ $this->headLink()->appendStylesheet('/modules/rcm-user/admin.css');
 $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
 
 ?>
-<div ng-app="rcmuserAdminAclApp">
+<div xx-ng-app="rcmuserAdminAclApp">
     <div class="rcmuser" ng-controller="rcmuserAdminAclRoles">
 
         <div class="container-fluid admin-acl">
@@ -387,13 +387,13 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
             <div class="container-fluid"
                  ng-hide="rcmUserHttp.alerts.results.length || rcmUserHttp.loading">
 
-                <accordion close-others="oneAtATime">
+                <uib-accordion close-others="oneAtATime">
 
                     <!-- + ROLE -->
-                    <accordion-group is-open="isopen" heading="{{role.roleId}}"
+                    <uib-accordion-group is-open="isopen" heading="{{role.roleId}}"
                                      ng-repeat="roleData in roles">
 
-                        <accordion-heading>
+                        <uib-accordion-heading>
                             <div class="accordion-heading">
                                 <span class="roleId" tooltip-placement="right"
                                       tooltip="This is a user role with roleId of &quot;{{roleData.role.roleId}}&quot;">{{levelRepeat(roleData.roleNs, '&#8901;&#8901;', '.')}} {{roleData.role.roleId}}
@@ -404,7 +404,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
 
                                 </span>
                             </div>
-                        </accordion-heading>
+                        </uib-accordion-heading>
                         <section class="roleHeader">
                             <div class="roleDetails">
                                 <div class="roleIdDetails">
@@ -523,9 +523,9 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-acl-app.js');
                             </div>
                         </div>
                         <!-- + RESOURCE -->
-                    </accordion-group>
+                    </uib-accordion-group>
                     <!-- - ROLE -->
-                </accordion>
+                </uib-accordion>
             </div>
         </div>
     </div>

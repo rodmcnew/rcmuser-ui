@@ -5,12 +5,12 @@ angular.module('rcmuserAdminUserRoleApp').controller(
     'rcmuserAdminUserRole',
     [
         '$scope',
-        '$modal',
+        '$uibModal',
         'rcmUserConfig',
         'RcmUserHttp',
         'RcmUserResult',
         'RcmResults',
-        function ($scope, $modal, rcmUserConfig, RcmUserHttp, RcmUserResult, RcmResults) {
+        function ($scope, $uibModal, rcmUserConfig, RcmUserHttp, RcmUserResult, RcmResults) {
             var self = this;
 
             self.url = {

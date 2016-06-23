@@ -6,7 +6,7 @@ angular.module('rcmuserAdminUsersApp').controller(
     [
         '$scope',
         '$log',
-        '$modal',
+        '$uibModal',
         'RcmUserHttp',
         'RcmUserResult',
         'RcmResults',
@@ -14,7 +14,7 @@ angular.module('rcmuserAdminUsersApp').controller(
         function (
             $scope,
             $log,
-            $modal,
+            $uibModal,
             RcmUserHttp,
             RcmUserResult,
             RcmResults,

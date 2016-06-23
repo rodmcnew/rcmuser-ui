@@ -6,13 +6,22 @@ angular.module('rcmuserAdminAclApp').controller(
     [
         '$scope',
         '$log',
-        '$modal',
+        '$uibModal',
         'RcmUserHttp',
         'RcmUserResult',
         'RcmResults',
         'getNamespaceRepeatString',
         'rcmuserAdminAclData',
-        function ($scope, $log, $modal, RcmUserHttp, RcmUserResult, RcmResults, getNamespaceRepeatString, rcmuserAdminAclData) {
+        function (
+            $scope,
+            $log,
+            $uibModal,
+            RcmUserHttp,
+            RcmUserResult,
+            RcmResults,
+            getNamespaceRepeatString,
+            rcmuserAdminAclData
+        ) {
 
             var getRoles;
             var self = this;
@@ -121,7 +130,7 @@ angular.module('rcmuserAdminAclApp').controller(
 
                     $scope.allRulePrivileges = function (hasAllPrivileges) {
 
-                        if(!hasAllPrivileges) {
+                        if (!hasAllPrivileges) {
                             return;
                         }
                         for (var property in $scope.selected.privileges) {
@@ -143,7 +152,7 @@ angular.module('rcmuserAdminAclApp').controller(
                     }
                 };
 
-                var modal = $modal.open(
+                var modal = $uibModal.open(
                     {
                         templateUrl: 'addRule.html',
                         controller: self.controller,
@@ -210,7 +219,7 @@ angular.module('rcmuserAdminAclApp').controller(
                     };
                 };
 
-                var modal = $modal.open(
+                var modal = $uibModal.open(
                     {
                         templateUrl: 'removeRule.html',
                         controller: self.controller,
@@ -285,7 +294,7 @@ angular.module('rcmuserAdminAclApp').controller(
                     };
                 };
 
-                var modal = $modal.open(
+                var modal = $uibModal.open(
                     {
                         templateUrl: 'addRole.html',
                         controller: self.controller,
@@ -345,7 +354,7 @@ angular.module('rcmuserAdminAclApp').controller(
                     };
                 };
 
-                var modal = $modal.open(
+                var modal = $uibModal.open(
                     {
                         templateUrl: 'removeRole.html',
                         controller: self.controller,
