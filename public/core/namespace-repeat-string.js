@@ -3,13 +3,14 @@
  */
 angular.module('rcmuserCore').factory(
     'getNamespaceRepeatString', function () {
+        return function (namespace, repeatStr, namespaceDelimiter) {
+            namespace = '' + namespace;
 
-        return function (namespace, repeatStr, namspaceDelimiter) {
-            if (!namspaceDelimiter) {
-                namspaceDelimiter = ".";
+            if (!namespaceDelimiter) {
+                namespaceDelimiter = ".";
             }
 
-            var n = (namespace.split(namspaceDelimiter).length - 1);
+            var n = (namespace.split(namespaceDelimiter).length - 1);
             var a = [];
             while (a.length < n) {
                 a.push(repeatStr);

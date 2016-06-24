@@ -8,68 +8,131 @@ angular.module('rcmuserCore').factory(
         '$http',
         'RcmUserResult',
         'RcmResults',
-        function ($log, $http, RcmUserResult, RcmResults) {
-
+        'rcmUserEventManager',
+        function (
+            $log,
+            $http,
+            RcmUserResult,
+            RcmResults,
+            rcmUserEventManager
+        ) {
             var RcmUserHttp = function () {
 
                 var self = this;
+
+                self.getEventManager = function () {
+                    return rcmUserEventManager;
+                };
+
                 self.http = $http;
                 self.comErrorMessage = 'There was an error talking to the server: ';
                 self.includeSuccessAlerts = false;
-                self.loading = 0;
                 self.alerts = new RcmResults();
 
-                self.loadingOn = function () {
+                var loadingCount = 0;
 
-                    self.loading++;
-                };
-
-                self.loadingOff = function () {
-
-                    if (self.loading > 0) {
-
-                        self.loading--;
+                /**
+                 * onLoading
+                 * @param namespace
+                 * @param loading
+                 */
+                var loading = function (namespace, loading) {
+                    if (loading) {
+                        loadingCount++;
+                    } else {
+                        if (loadingCount > 0) {
+                            loadingCount--;
+                        }
                     }
+
+                    if (namespace) {
+                        rcmUserEventManager.trigger(
+                            namespace + '.loading',
+                            loading
+                        );
+                    }
+
+                    rcmUserEventManager.trigger(
+                        'RcmUserHttp.loading',
+                        (loadingCount > 0)
+                    );
                 };
 
-                self.execute = function (config, onSuccess, onFail) {
+                /**
+                 * onApiSuccess
+                 * @param namespace
+                 * @param onSuccess
+                 * @param data
+                 * @param status
+                 * @param headers
+                 * @param config
+                 */
+                var onApiSuccess = function (namespace, onSuccess, data, status, headers, config) {
 
-                    self.loadingOn();
+                    if (self.includeSuccessAlerts) {
+
+                        if (data.messages.length == 0) {
+                            //$log.log('default-success-alert');
+                            data.messages.push("Success!")
+                        }
+
+                        self.alerts.add(data);
+                    }
+
+                    if (namespace) {
+                        rcmUserEventManager.trigger(namespace + '.success', data);
+                    }
+
+                    if (typeof(onSuccess) === 'function') {
+                        onSuccess(data, status, headers, config);
+                    }
+
+                    loading(namespace, false);
+                };
+
+                /**
+                 * onApiError
+                 * @param namespace
+                 * @param onError
+                 * @param data
+                 * @param status
+                 * @param headers
+                 * @param config
+                 */
+                var onApiError = function (namespace, onError, data, status, headers, config) {
+
+                    self.alerts.add(data);
+
+                    if (namespace) {
+                        rcmUserEventManager.trigger(namespace + '.error', data);
+                    }
+
+                    if (typeof(onError) === 'function') {
+                        onError(data, status, headers, config);
+                    }
+
+                    loading(namespace, false);
+                };
+
+                var beforeExecute = function (eventNamespace) {
+                    loading(eventNamespace, true);
                     self.alerts.clear();
+                };
 
+                /**
+                 * execute
+                 * @param config
+                 * @param onSuccess
+                 * @param onError
+                 * @param eventNamespace
+                 */
+                self.execute = function (config, onSuccess, onError, eventNamespace) {
+                    beforeExecute(eventNamespace);
                     self.http(config)
                         .success(
                             function (data, status, headers, config) {
-
-                                //$log.log('call-success');
-                                // if is result object
-                                if (typeof(data.code) !== 'undefined' && typeof(data.messages) !== 'undefined') {
-
-                                    if (data.code < 1) {
-
-                                        //$log.log('result-fail');
-                                        self.alerts.add(data);
-
-                                        if (typeof(onFail) === 'function') {
-
-                                            onFail(data);
-                                        }
-
-                                        self.loadingOff();
-                                        return;
-                                    }
-
-                                    if (self.includeSuccessAlerts) {
-
-                                        if (data.messages.length == 0) {
-                                            //$log.log('default-success-alert');
-                                            data.messages.push("Success!")
-                                        }
-
-                                        self.alerts.add(data);
-                                    }
-                                } else {
-
+                                // !if is result object
+                                if (typeof(data.code) === 'undefined' || typeof(data.messages) === 'undefined') {
                                     $log.error('Result object not returned: ', data);
                                     var failResult = new RcmUserResult(
                                         0,
@@ -77,21 +140,20 @@ angular.module('rcmuserCore').factory(
                                         data
                                     );
 
-                                    self.alerts.add(failResult);
+                                    onApiError(eventNamespace, onError, failResult, status, headers, config);
+                                    return;
                                 }
 
-                                if ((typeof(onSuccess) === 'function')) {
-
-                                    onSuccess(data, config);
+                                if (data.code < 1) {
+                                    onApiError(eventNamespace, onError, data, status, headers, config);
+                                    return;
                                 }
 
-                                self.loadingOff();
+                                onApiSuccess(eventNamespace, onSuccess, data, status, headers, config);
                             }
                         )
                         .error(
                             function (data, status, headers, config) {
-
-                                //$log.log('call-error');
 
                                 var failResult = new RcmUserResult(
                                     0,
@@ -101,20 +163,13 @@ angular.module('rcmuserCore').factory(
 
                                 $log.error(failResult);
 
-                                self.alerts.add(failResult);
-
-                                if (typeof(onFail) === 'function') {
-
-                                    onFail(failResult);
-                                }
-
-                                self.loadingOff();
+                                onApiError(eventNamespace, onError, failResult, status, headers, config);
                             }
                         );
                 }
             };
 
-            return RcmUserHttp;
+            return new RcmUserHttp();
         }
     ]
 );

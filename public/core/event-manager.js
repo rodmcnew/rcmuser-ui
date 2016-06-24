@@ -39,3 +39,10 @@ rcmUser.eventManager = {
         return false;
     }
 };
+
+angular.module('rcmuserCore').factory(
+    'rcmUserEventManager',
+    function () {
+        return rcmUser.eventManager;
+    }
+);
