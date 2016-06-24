@@ -28,12 +28,17 @@
 }
 
 /* <loader> */
-.loading {
-    display: none;
-
+.rcm-user.loading .loading-icon {
+    font-size: 1em;
+    color: #999999;
     -webkit-animation: spin 1s linear infinite;
     -moz-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
+}
+
+.rcm-user.loading .loading-message {
+    font-size: 1em;
+    color: #999999;
 }
 
 @-moz-keyframes spin {

@@ -23,8 +23,8 @@
     "fxp/composer-asset-plugin": ">=1.1.3",
     "rcm/user-api": "1.*",
     "rwoverdijk/assetmanager": "1.*",
+    "bower-asset/jquery": "3.*",
     "bower-asset/angular": "~1",
-    "bower-asset/angular-bootstrap": "~1",
     "bower-asset/bootstrap": "^3.3"
   },
   "autoload": {

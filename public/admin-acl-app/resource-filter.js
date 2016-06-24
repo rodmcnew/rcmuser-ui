@@ -2,7 +2,8 @@
  * rcmuserAdminAclApp.resourceFilter
  */
 angular.module('rcmuserAdminAclApp').filter(
-    'resourceFilter', function () {
+    'resourceFilter', 
+    function () {
 
         var maxResults = 10;
 

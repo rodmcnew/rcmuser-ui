@@ -2,7 +2,8 @@
  * rcmuserCore.rcmAlerts
  */
 angular.module('rcmuserCore').directive(
-    'rcmAlerts', function () {
+    'rcmAlerts', 
+    function () {
         /*
          * Example:
          * <div rcm-alerts rcm-results="alerts" alert-title="'An error occured:'"></div>

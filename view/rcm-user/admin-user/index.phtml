@@ -34,15 +34,14 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                         <button type="button"
                                 class="btn btn-primary btn-xs"
                                 ng-click="addUser()"
-                                ng-disabled="rcmUserHttp.loading">
+                                ng-disabled="loading">
                             <i class="glyphicon glyphicon-plus"></i> add user
                         </button>
                     </div>
                 </div>
             </form>
 
-            <i class="glyphicon glyphicon-refresh loading"
-               ng-class="{'active': rcmUserHttp.loading}"></i>
+            <div rcm-user-loading-directive="loading"></div>
 
             <div class="useraccordion" close-others="oneAtATime">
 
@@ -71,8 +70,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                     <div class="panel-body" ng-show="userPanelBodyShow">
                         <div class="" ng-controller="rcmuserAdminUser"
                              ng-init="user=user; users=users; index=$index;">
-                            <i class="glyphicon glyphicon-refresh loading"
-                               ng-class="{'active': rcmUserHttp.loading}"></i>
+                            <div rcm-user-loading-directive="loading"></div>
 
                             <div>
                                 <section class="user">
@@ -161,7 +159,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                                                     <button
                                                                         class="btn btn-warning btn-xs"
                                                                         ng-click="removeRole(roleId)"
-                                                                        ng-disabled="isDefaultRole(roleId) ||  rcmUserHttp.loading"
+                                                                        ng-disabled="isDefaultRole(roleId) || loading"
                                                                         type="button"
                                                                     >
                                                                         <span
@@ -192,14 +190,14 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                                                     role="menu">
                                                                     <li ng-repeat="(roleNs, role) in roles">
                                                                         <a
-                                                                            href="#"
+                                                                            href="javascript:void(0)"
                                                                             ng-click="addRole(role.roleId)"
                                                                             ng-hide="isDefaultRole(role.roleId)">
                                                                             {{getNamespaceRepeatString(roleNs,
                                                                             '..')}} {{role.roleId}}
                                                                         </a>
                                                                         <a
-                                                                            href="#"
+                                                                            href="javascript:void(0)"
                                                                             ng-show="isDefaultRole(role.roleId)">
                                                                             {{getNamespaceRepeatString(roleNs,
                                                                             '..')}} {{role.roleId}}
@@ -224,7 +222,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                         <button
                                             class="btn btn-primary btn-xs"
                                             ng-click="updateUser(user)"
-                                            ng-disabled="rcmUserHttp.loading"
+                                            ng-disabled="loading"
                                             ng-hide="user.isNew"
                                             type="button"
                                         >
@@ -233,7 +231,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                         <button
                                             class="btn btn-primary btn-xs"
                                             ng-click="createUser(user)"
-                                            ng-disabled="rcmUserHttp.loading"
+                                            ng-disabled="loading"
                                             ng-show="user.isNew"
                                             type="button"
                                         >
@@ -242,7 +240,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                         <button
                                             class="btn btn-warning btn-xs"
                                             ng-click="removeUserDialog = true"
-                                            ng-disabled="rcmUserHttp.loading"
+                                            ng-disabled="loading"
                                             ng-hide="removeUserDialog || user.isNew"
                                             type="button"
                                         >
@@ -252,13 +250,13 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                              ng-show="removeUserDialog">
                                             <button type="button" class="btn btn-xs"
                                                     ng-click="removeUserDialog = false"
-                                                    ng-disabled="rcmUserHttp.loading">
+                                                    ng-disabled="loading">
                                                 keep user
                                             </button>
                                             <button type="button"
                                                     class="btn btn-danger btn-xs"
                                                     ng-click="removeUser(user)"
-                                                    ng-disabled="rcmUserHttp.loading">
+                                                    ng-disabled="loading">
                                                 <i class="glyphicon glyphicon-minus"></i> remove
                                                 user
                                             </button>
@@ -266,7 +264,7 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                         <button
                                             class="btn btn-xs"
                                             ng-click="resetUser()"
-                                            ng-disabled="rcmUserHttp.loading"
+                                            ng-disabled="loading"
                                             ng-hide="user.isNew || !orgUser.id"
                                             type="button"
                                         >
@@ -275,14 +273,13 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
                                         <button
                                             class="btn btn-xs"
                                             ng-click="cancelCreateUser()"
-                                            ng-disabled="rcmUserHttp.loading"
+                                            ng-disabled="loading"
                                             ng-show="user.isNew"
                                             type="button"
                                         >
                                             cancel
                                         </button>
-                                        <i class="glyphicon glyphicon-refresh loading"
-                                           ng-class="{'active': rcmUserHttp.loading}"></i>
+                                        <div rcm-user-loading-directive="loading"></div>
                                     </div>
                                 </section>
 
@@ -302,8 +299,10 @@ $this->headScript()->appendFile('/modules/rcm-user/admin-users-app.js');
 
         </div>
 
-        <button type="button" class="btn btn-danger btn-xs"
-                ng-click="showMessages = !showMessages" ng-show="messages">
+        <button type="button"
+                class="btn btn-danger btn-xs"
+                ng-click="showMessages = !showMessages"
+                ng-show="messages.length">
             <i class="glyphicon glyphicon-edit"></i>
             <span ng-hide="showMessages">show errors</span>
             <span ng-show="showMessages">hide errors</span>

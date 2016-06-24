@@ -14,18 +14,30 @@ return [
                     'modules/rcm-user/core/cache.js',
                     'modules/rcm-user/core/event-manager.js',
                     'modules/rcm-user/core/namespace-repeat-string.js',
+                    'modules/rcm-user/core/rcm-user-safe-apply.js',
                     'modules/rcm-user/core/rcm-user.js',
                     'modules/rcm-user/core/rcm-user-config.js',
                     'modules/rcm-user/core/rcm-user-http.js',
                     'modules/rcm-user/core/rcm-user-result.js',
                     'modules/rcm-user/core/rcm-user-results.js',
                     'modules/rcm-user/core/rcm-alerts-directive.js',
+                    'modules/rcm-user/core/rcm-user-loading-directive.js',
                     'modules/rcm-user/core/rcm-user-global.js',
+                    'modules/rcm-user/core/rcm-user-selected-data-service.js',
+                    'modules/rcm-user/core/rcm-user-user-service.js',
+                    'modules/rcm-user/core/rcm-user-acl-resource-service.js',
+                    'modules/rcm-user/core/rcm-user-acl-role-service.js',
+                    'modules/rcm-user/core/rcm-user-acl-rule-service.js',
+
                 ],
                 'modules/rcm-user/admin-acl-app.js' => [
                     'modules/rcm-user/admin-acl-app/module.js',
                     'modules/rcm-user/admin-acl-app/rcmuser-admin-acl-data.js',
+                    'modules/rcm-user/admin-acl-app/rcmuser-admin-acl-add-rule-directive.js',
+                    'modules/rcm-user/admin-acl-app/rcmuser-admin-acl-add-role-directive.js',
                     'modules/rcm-user/admin-acl-app/rcmuser-admin-acl-roles-controller.js',
+                    'modules/rcm-user/admin-acl-app/rcmuser-admin-acl-remove-role-directive.js',
+                    'modules/rcm-user/admin-acl-app/rcmuser-admin-acl-remove-rule-directive.js',
                     'modules/rcm-user/admin-acl-app/resource-filter.js',
                 ],
                 'modules/rcm-user/admin-user-role-app.js' => [
@@ -127,7 +139,8 @@ return [
                 // Expect Angular from RCM core
                 // '/vendor/angular/angular.js',
                 '/vendor/bootstrap/dist/js/bootstrap.min.js',
-                '/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+                //'/vendor/angular-bootstrap/ui-bootstrap.min.js',
+                //'/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
             ],
 
             'css' => [

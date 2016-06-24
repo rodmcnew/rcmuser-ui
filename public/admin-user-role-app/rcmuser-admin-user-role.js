@@ -5,12 +5,13 @@ angular.module('rcmuserAdminUserRoleApp').controller(
     'rcmuserAdminUserRole',
     [
         '$scope',
-        '$uibModal',
         'rcmUserConfig',
         'RcmUserHttp',
-        'RcmUserResult',
-        'RcmResults',
-        function ($scope, $uibModal, rcmUserConfig, RcmUserHttp, RcmUserResult, RcmResults) {
+        function (
+            $scope,
+            rcmUserConfig,
+            RcmUserHttp
+        ) {
             var self = this;
 
             self.url = {
@@ -18,7 +19,7 @@ angular.module('rcmuserAdminUserRoleApp').controller(
                 roles: rcmUserConfig.url.rulesByroles
             };
 
-            self.rcmUserHttp = new RcmUserHttp();
+            self.rcmUserHttp = RcmUserHttp;
 
             $scope.user = {};
 
@@ -27,7 +28,7 @@ angular.module('rcmuserAdminUserRoleApp').controller(
 
             $scope.oneAtATime = false;
 
-            $scope.getUser = function(userId) {
+            $scope.getUser = function (userId) {
                 // @todo Get a user VIA API
                 $scope.user = {};
             }
