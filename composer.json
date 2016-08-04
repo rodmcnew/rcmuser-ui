@@ -20,7 +20,7 @@
   "require": {
     "php": ">=5.5",
     "zendframework/zendframework": "2.*",
-    "fxp/composer-asset-plugin": ">=1.1.3",
+    "fxp/composer-asset-plugin": "^1.2.0",
     "rcm/user-api": "1.*",
     "rwoverdijk/assetmanager": "1.*",
     "bower-asset/jquery": "3.*",
@@ -30,6 +30,12 @@
   "autoload": {
     "psr-4": {
       "RcmUser\\Ui\\": "src/"
+    }
+  },
+  "extra": {
+    "asset-pattern-skip-version": "(-patch*)",
+    "asset-vcs-driver-options": {
+      "github-no-api": true
     }
   }
 }
