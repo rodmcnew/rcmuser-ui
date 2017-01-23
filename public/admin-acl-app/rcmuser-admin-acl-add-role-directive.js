@@ -1,10 +1,12 @@
 angular.module('rcmuserAdminAclApp').directive(
     'rcmuserAdminAclAddRoleDirective',
     [
+        '$window',
         'rcmUserAclRoleService',
         'rcmUserSelectedDataService',
         'getNamespaceRepeatString',
         function (
+            $window,
             rcmUserAclRoleService,
             rcmUserSelectedDataService,
             getNamespaceRepeatString
@@ -64,6 +66,7 @@ angular.module('rcmuserAdminAclApp').directive(
                 var onError = function (data) {
                     $window.alert('An error occurred');
                     console.error(data);
+                    scope.loading = false;
                 };
 
                 var onGetRolesSuccess = function (data, status) {
