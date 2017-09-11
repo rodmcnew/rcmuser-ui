@@ -20,7 +20,7 @@
   "require": {
     "php": ">=5.5",
     "zendframework/zendframework": "2.*",
-    "fxp/composer-asset-plugin": "^1.2.0",
+    "fxp/composer-asset-plugin": "^1",
     "rcm/user-api": "1.*",
     "rwoverdijk/assetmanager": "1.*",
     "bower-asset/jquery": "3.*",
