@@ -32,11 +32,5 @@
     "psr-4": {
       "RcmUser\\Ui\\": "src/"
     }
-  },
-  "extra": {
-    "asset-pattern-skip-version": "(-patch*)",
-    "asset-vcs-driver-options": {
-      "github-no-api": true
-    }
   }
 }
