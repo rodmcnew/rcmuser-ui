@@ -17,15 +17,17 @@
       "homepage": "https://github.com/reliv"
     }
   ],
+  "suggest":{
+    "bower-asset/jquery": "3.*",
+    "bower-asset/angular": "~1",
+    "bower-asset/bootstrap": "~3.3"
+  },
   "require": {
     "php": ">=5.5",
     "zendframework/zendframework": "2.*",
     "fxp/composer-asset-plugin": "^1",
     "rcm/user-api": "1.*",
-    "rwoverdijk/assetmanager": "1.*",
-    "bower-asset/jquery": "3.*",
-    "bower-asset/angular": "~1",
-    "bower-asset/bootstrap": "~3.3"
+    "rwoverdijk/assetmanager": "1.*"
   },
   "autoload": {
     "psr-4": {
