@@ -3,24 +3,12 @@ namespace RcmUser\Ui\View\Helper;
 
 use RcmUser\Acl\Service\AuthorizeService;
 use RcmUser\Authentication\Service\UserAuthenticationService;
-use RcmUser\User\Entity\User;
+use RcmUser\User\Entity\UserInterface;
 use Zend\View\Helper\AbstractHelper;
 
 /**
- * @deprecated Use RcmUserService->hasRoleBasedAccess()
- * Class RcmUserHasRoleBasedAccess
- *
- * RcmUserHasRoleBasedAccess
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmUser\Ui\View\Helper
- * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2015 Reliv International
- * @license   License.txt New BSD License
- * @version   Release: <package_version>
- * @link      https://github.com/reliv
+ * @deprecated Use \RcmUser\Api\Acl\HasRoleBasedAccessUser
+ * @author     James Jervis - https://github.com/jerv13
  */
 class RcmUserHasRoleBasedAccess extends AbstractHelper
 {
@@ -61,7 +49,7 @@ class RcmUserHasRoleBasedAccess extends AbstractHelper
     ) {
         $user = $this->userAuthService->getIdentity();
 
-        if (!($user instanceof User)) {
+        if (!($user instanceof UserInterface)) {
             return false;
         }
 
