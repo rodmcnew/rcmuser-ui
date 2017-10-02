@@ -2,43 +2,36 @@
 
 namespace RcmUser\Ui\Controller;
 
+use RcmUser\Api\Acl\IsAllowed;
+use RcmUser\Api\GetPsrRequest;
 use RcmUser\Provider\RcmUserAclResourceProvider;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
- * UserController
- *
- * UserController
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmUser\Ui\Controller
- * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   Release: <package_version>
- * @link      https://github.com/reliv
+ * @author James Jervis - https://github.com/jerv13
  */
 class UserTestController extends AbstractActionController
 {
     /**
-     * indexAction
-     *
-     * @return array
+     * @return array|\Zend\Stdlib\ResponseInterface
      */
     public function indexAction()
     {
+        $psrRequest = GetPsrRequest::invoke();
 
-        $isAllowed = $this->rcmUserIsAllowed(
-            RcmUserAclResourceProvider::RESOURCE_ID_ROOT,
-            null,
-            RcmUserAclResourceProvider::PROVIDER_ID
+        /** @var IsAllowed $isAllowed */
+        $isAllowed = $this->getServiceLocator()->get(
+            IsAllowed::class
         );
 
-        if (!$isAllowed) {
+        $allowed = $isAllowed->__invoke(
+            $psrRequest,
+            RcmUserAclResourceProvider::RESOURCE_ID_ROOT,
+            null
+        );
 
+        if (!$allowed) {
             $response = $this->getResponse();
             $response->setStatusCode(Response::STATUS_CODE_401);
             $response->setContent(
