@@ -6,20 +6,8 @@ use RcmUser\Service\RcmUserService;
 use Zend\View\Helper\AbstractHelper;
 
 /**
- * @deprecated Use RcmUserService->getCurrentUser()
- * Class RcmUserGetCurrentUser
- *
- * RcmUserGetCurrentUser
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmUser\Ui\View\Helper
- * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   Release: <package_version>
- * @link      https://github.com/reliv
+ * @deprecated Use \RcmUser\Api\Authentication\GetIdentity
+ * @author James Jervis - https://github.com/jerv13
  */
 class RcmUserGetCurrentUser extends AbstractHelper
 {
@@ -46,7 +34,7 @@ class RcmUserGetCurrentUser extends AbstractHelper
      *
      * @param mixed $default default
      *
-     * @return null|\RcmUser\User\Entity\User
+     * @return null|\RcmUser\User\Entity\UserInterface
      */
     public function __invoke($default = null)
     {
